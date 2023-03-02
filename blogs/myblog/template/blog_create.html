@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<center>
+<h1 style="color:rgb(106, 0, 255)";text-align:center>Post your blog!!</h1>
+<form action="." method="POST" centre>{% csrf_token %}
+    {{form.as_p}}
+    <input type='submit' value='post'/>
+</form>
+</center>
+{% endblock %}

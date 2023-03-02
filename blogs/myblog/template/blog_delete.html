@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<center>
+<form action='.' method='POST'>{% csrf_token %}
+    <h1>Want to delete your post "{{obj.Title}}"?</h1>
+    <p><input type='submit' value='YES'><br><a href='http://127.0.0.1:8000/'>NO</a></p>
+</form>
+</center>
+{% endblock %}

@@ -1,0 +1,25 @@
+<!doctype html>
+<title>MY BLOG</title>
+<body>
+    <center>
+<h1>REGISTRATION</h1>
+<form  method="POST" novalidate>{% csrf_token %}
+    {% for field in form %}
+	<p>
+    {% if field.errors %}
+    <ul class="errorlist">
+        {% for error in field.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+     {{ field.label_tag }} {{ field }}
+</p>
+{% endfor %}
+
+<input type="submit" value="Register"/>
+<p>Already have an account?<a href="{% url 'login' %}">Login</a></p>
+</form>
+</center>
+</body>
+</html>
