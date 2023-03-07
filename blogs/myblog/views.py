@@ -8,11 +8,19 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 @login_required
 def home_view(request):
-    myblogs=myblog.objects.all()
+    myblogs=myblog.objects.filter(Author=request.user)
     context={
         'blogs': myblogs
     }
     return render(request,'home.html',context)
+@login_required
+
+def allposts(request):
+    allblogs=myblog.objects.all()
+    context={
+        'blogs' : allblogs
+    }
+    return render(request,'allposts.html',context)
 
 @login_required
 def blog_create_view(request):
