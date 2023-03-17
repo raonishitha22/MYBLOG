@@ -1,13 +1,12 @@
 from django import forms
-from .models import myblog
+from .models import myblog,BlogComment
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 class blogform(forms.ModelForm):
-    Content=forms.CharField(required=True,widget=forms.Textarea(attrs={"placeholder":"Enter your views on the subject","size":"200"}))
     class Meta:
         model=myblog
-        fields=['ID','Title','Content','published_at']
+        fields=['Title','Content','published_at']
         
 
 class regisform(UserCreationForm):
@@ -17,4 +16,10 @@ class regisform(UserCreationForm):
 class loginform(forms.Form):
     username=forms.CharField(max_length=65)
     password=forms.CharField(max_length=65,widget=forms.PasswordInput)
+    
+class commentform(forms.ModelForm):
+    content=forms.CharField(widget=forms.Textarea(attrs={'rows':'4',}))
+    class Meta:
+        model=BlogComment
+        fields=['content']    
           

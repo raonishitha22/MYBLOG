@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from .models import myblog
-from .forms import blogform,regisform,loginform
+from .models import myblog,BlogComment
+from .forms import blogform,regisform,loginform,commentform
 from django.contrib import messages
 from django.contrib.auth import login,authenticate, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
+from django.views import generic
 
 # Create your views here.
 @login_required
@@ -58,8 +60,8 @@ def blog_delete_view(request,ID):
     return render(request,"blog_delete.html",context) 
 
 @login_required
-def dynamic_view(request,id):
-    obj=get_object_or_404(myblog,ID=id)
+def dynamic_view(request,ID):
+    obj=get_object_or_404(myblog,ID=ID)
     context={
         "obj":obj
     }
@@ -78,11 +80,95 @@ def blog_update_view(request,id):
         if form.is_valid():
             form.save()
             messages.success(request,'Your post is updated')  
-            return redirect('posts')
+            return redirect('home')
         else:
             return render(request,'blog_update.html',{'form':form})
         
+#@login_required
+def post_detail(request,ID):
+    template_name='blog_dynamic.html'
+    post=get_object_or_404(myblog,ID=ID)
+    comments=BlogComment.objects.filter(blog_id=ID)
+    #comment_form=commentform(data=request.POST)
+    new_comment=None
+    if request.method=='POST':
+        comment_form=commentform(data=request.POST)
+        
+        if comment_form.is_valid():
+           # Author=request.User
+            new_comment=comment_form.save(commit=False)
+            new_comment.Author=request.user
+            new_comment.blog=post
+            new_comment.save()
+            #context={'form':form}
+            new_comment=None
+            comment_form=commentform()
+        
+    else:
+        comment_form=commentform()
+    context={'post':post,'comment_form':comment_form,'comments':comments,'new_comment':new_comment}    
+    return render(request,'blog_dynamic.html',context)      
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+""" class commentview(DetailView):
     
     
+    model=myblog
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+
+        comments_connected = BlogComment.objects.filter(
+            blog=self.get_object()).order_by('date_posted')
+        data['comments'] = comments_connected
+        data['comment_form'] = NewCommentForm( )
+
+        return data
+
+    def post(self, request, *args, **kwargs):
+        new_comment = BlogComment(content=request.POST.get('content'),
+                                  author=request.POST.get('author'),
+                                  blog=self.get_object())
+        new_comment.save()
+        return self.get(self, request, *args, **kwargs)
+                
+             """
+
+
+
+
+
+
+
+
+
+
+
+
+
+

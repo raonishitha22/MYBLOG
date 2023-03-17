@@ -1,8 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
 <center>
-<h1>{{obj.Title}}</h1>
-<p><b>AUTHOR</b> : {{obj.Author}}</p>
-<p><b>BLOG</b> : {{obj.content}} </p>
+<h1>{{post.Title}}</h1>
+<p><b>AUTHOR</b> : {{post.Author}}</p>
+<p style="margin:0vw;border-style:solid;border-color:darkolivegreen">{{post.Content}} </p>
+<p><b>Published at</b> : {{post.published_at}}</p>
+
+<!-- <h2>Leave your comment!</h2> -->
+<div class="col-md-8 card mb-4  mt-3 ">
+  <div class="card-body">
+    <!-- comments -->
+    <h2>{{ comments.count }} comments</h2>
+
+    {% for comment in comments %}
+    <div class="comments" style="padding: 10px;">
+      <p class="font-weight-bold">
+       Author: {{comment.Author}}<br>
+        
+        <span class=" text-muted font-weight-normal">
+          {{ comment.content }} <br>
+          date_posted: {{comment.date_posted}}
+        </span>
+      </p>
+      {{ comment.body | linebreaks }}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+<div class="col-md-8 card mb-4  mt-3 ">
+  <div class="card-body">
+    <!-- {% if new_comment %}
+    <div class="alert alert-success" role="alert">
+      Your comment is awaiting moderation
+    </div>
+    {% else %} -->
+    <h3>Leave a comment</h3>
+    <form method="post" style="margin-top: 1.3em;">
+      {{ comment_form.as_p }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+    </form>
+   <!--  {% endif %} -->
+  </div>
+</div>
+</div>
+</div>
+
 </center>
 {% endblock %}

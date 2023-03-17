@@ -49,10 +49,10 @@ def register(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
-            user.is_active = False
+            #user.is_active = False
             user.save()
             #to get the domain of current site
-            current_site = get_current_site(request)  
+            """ current_site = get_current_site(request)  
             mail_subject = 'Activation link has been sent to your email id' 
             message = render_to_string('acc_active_email.html', {  
                 'user': user,  
@@ -65,13 +65,13 @@ def register(request):
                         mail_subject, message, to=[to_email]
             )
             email.send()
-            return HttpResponse('Please confirm your email address to complete the registration')
-            login(request, user)
-            return redirect('home')
+            return HttpResponse('Please confirm your email address to complete the registration') """
+            #login(request, user)
+            return redirect('login')
         else:
             return render(request,'regis.html',{'form':form})
         
-def activate(request, uidb64, token):
+""" def activate(request, uidb64, token):
     User=get_user_model()
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -85,4 +85,4 @@ def activate(request, uidb64, token):
         # return redirect('home')
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
-        return HttpResponse('Activation link is invalid!')
+        return HttpResponse('Activation link is invalid!') """

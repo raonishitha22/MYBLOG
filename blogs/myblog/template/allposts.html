@@ -2,10 +2,11 @@
 {% block content %}
 <h1>Blogs</h1>
 {% for blog in blogs %}
-{% if request.user.is_authenticated and request.user != blog.Author %}
+{% if request.user.is_authenticated %}
 <h2>{{blog.Title}}</h2>
 <small>Published on {{blog.published_at| date:"M d,Y"}} by {{blog.Author}}</small>
-<p>{{blog.Content}}</p>
+<a href="{% url 'detail' blog.ID %}">Read content</a>
+
 {% endif %}
 {% endfor %}
 {% endblock %}
