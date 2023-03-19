@@ -131,7 +131,6 @@ def search(request):
         return render(request,'search.html',context)
         
 
-@login_required
 
 
 
@@ -160,28 +159,7 @@ def search(request):
 
 
 
-""" class commentview(DetailView):
-    
-    
-    model=myblog
-    def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
 
-        comments_connected = BlogComment.objects.filter(
-            blog=self.get_object()).order_by('date_posted')
-        data['comments'] = comments_connected
-        data['comment_form'] = NewCommentForm( )
-
-        return data
-
-    def post(self, request, *args, **kwargs):
-        new_comment = BlogComment(content=request.POST.get('content'),
-                                  author=request.POST.get('author'),
-                                  blog=self.get_object())
-        new_comment.save()
-        return self.get(self, request, *args, **kwargs)
-                
-             """
 
 
 
