@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{% url 'search' %}" >SEARCH</a>
+<h1>Blogs</h1>
+{% for blog in blogs %}
+{% if request.user.is_authenticated %}
+<h2>{{blog.Title}}</h2>
+<small>Published on {{blog.published_at| date:"M d,Y"}} by {{blog.Author}}</small>
+<a href="{% url 'detail' blog.ID %}" >Read content</a>
+
+{% endif %}
+<style>
+    a{
+        text-decoration:none;
+        color:white;
+        background-color:darkolivegreen;
+        height:20px;
+        font-size:15px;
+    }
+</style>
+{% endfor %}
+{% endblock %} 

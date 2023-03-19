@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+    <title>MY BLOG</title>
+    </head>
+    <body>
+        
+        <header>
+            <nav>
+            {%if request.user.is_authenticated %}
+            <a href="{% url 'home' %}">MY POSTS  </a>
+            <a href="{% url 'blog' %}">NEW POST  </a>
+            <!-- <span>Hi {{ request.user.username | title }}  </span> -->
+            <a href="{% url 'allposts' %}">ALL BLOGS  </a> 
+            <a href="{% url 'logout' %}">LOGOUT  </a>
+           
+            {%else%}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'register' %}">Register</a>
+            {%endif%}
+        </nav>
+        </header>
+        
+        <main>
+            {% if messages %}
+              <div class="messages">
+              {% for message in messages %}
+                  <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>
+                      {{ message }}
+                  </div>
+              {% endfor %}
+              </div>
+          {% endif %}
+        {% block content %}
+        replace me
+        {% endblock %}
+    </body>
+    <style>
+        header
+        {
+            background-color:darkolivegreen;
+            overflow: auto;
+            left:0;
+            right: 0;
+            top: 5px;
+            height: 30px;
+            align-items: center;
+        }
+        header a{
+            color: black;
+            font-size: 20px;
+            width: 25%;
+            text-align: center;
+            text-decoration: none;
+            padding: 9%;
+        }
+        header a.active
+        {
+            background-color: antiquewhite;
+        }
+    </style>
+</html>

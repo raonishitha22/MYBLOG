@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>My posts</h1>
+{% for blog in blogs %}
+<h2>{{blog.Title}}</h2>
+<small>Published on {{blog.published_at| date:"M d,Y"}} by {{blog.Author}}</small>
+<p>{{blog.Content}}</p>
+{% if request.user.is_authenticated and request.user == blog.Author %}
+<a href="{% url 'blog-edit' blog.ID %}">EDIT</a><br><br>
+<a href="{% url 'blog-del' blog.ID %}">DELETE</a>
+{% endif %}
+{% endfor %}
+<style>
+    a{
+        text-decoration:none;
+    }
+</style>
+{% endblock %}
