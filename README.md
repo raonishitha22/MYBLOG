@@ -4,6 +4,5 @@ ER diagram
 Features:
  1.Registration page
    ![image](https://user-images.githubusercontent.com/115818846/226365148-ab2e801f-713f-49b0-af63-10bdd497ddc4.png)
- 2.Login page
-   ![image](https://user-images.githubusercontent.com/115818846/226365411-e88d4c66-6703-4092-be23-0ae0ced76503.png)
+ 
  
