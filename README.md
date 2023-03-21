@@ -23,6 +23,15 @@ ER diagram
 This project named myblog is an application which allows users to post and view the blogs.This project is built using
 django framework, frontend is done with html and css.
 
+The user can create the account by registering by providing the required details and can login using username and 
+password to view and post the blogs.The user can either post the blogs or view the blogs written by
+ other users.It contains homepage which shows the blogs written by that user and gives the provision for updating
+using edit button and deleting the blog using delete button.The user can view the blogs written by others by the title and 
+can read the content if it looks intresting.
+
+The user can search the blogs by name.User can also post the comments on the blog, the comments are displayed under the 
+post and can be viewed by any user.The admin can manage the posts,users and comments.
+
 
    
  
