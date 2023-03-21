@@ -19,6 +19,10 @@ ER diagram
 ## 8.Comment feature
 ![image](https://user-images.githubusercontent.com/115818846/226608628-f23fbf87-6a54-4c41-84f6-63415e708034.png)
 
+# MYBLOG:Application which allows user to post and view blogs
+This project named myblog is an application which allows users to post and view the blogs.This project is built using
+django framework, frontend is done with html and css.
+
 
    
  
